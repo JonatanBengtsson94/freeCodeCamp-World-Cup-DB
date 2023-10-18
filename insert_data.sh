@@ -8,3 +8,12 @@ else
 fi
 
 # Do not change code above this line. Use the PSQL variable above to query your database.
+while IFS="," read YEAR ROUND WINNER OPPONENT WINNER_GOALS OPPONENT_GOALS
+do
+  echo $YEAR
+  echo $ROUND
+  echo $WINNER
+  echo $OPPONENT
+  echo $WINNER_GOALS
+  echo $OPPONENT_GOALS
+done < games.csv
