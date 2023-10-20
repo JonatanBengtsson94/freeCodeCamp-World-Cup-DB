@@ -8,12 +8,25 @@ else
 fi
 
 # Do not change code above this line. Use the PSQL variable above to query your database.
+# Truncate table
+$PSQL " TRUNCATE TABLE teams, games"
+# Read lines in csv
 while IFS="," read YEAR ROUND WINNER OPPONENT WINNER_GOALS OPPONENT_GOALS
 do
-  echo $YEAR
-  echo $ROUND
+  # Get team ID
+  TEAMID=$($PSQL "SELECT team_id FROM teams WHERE name='$WINNER'")
+  # If team not in table
+  if [ -z "$TEAMID" ]
+  then
+    $PSQL " INSERT INTO teams(name) VALUES('$WINNER')"
+  fi
+  echo $TEAMID
   echo $WINNER
   echo $OPPONENT
+  echo $YEAR
+  echo $ROUND
   echo $WINNER_GOALS
   echo $OPPONENT_GOALS
 done < games.csv
+
+
