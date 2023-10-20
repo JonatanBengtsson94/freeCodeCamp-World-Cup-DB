@@ -36,7 +36,7 @@ echo -e "\nList of unique winning team names in the whole data set:"
 echo "$($PSQL "SELECT name FROM teams WHERE team_id IN (SELECT winner_id FROM games) ORDER BY name")"
 
 echo -e "\nYear and team name of all the champions:"
-echo "$($PSQL "SELECT teams.name, games.year FROM teams INNER JOIN games ON teams.team_id = games.winner_id WHERE games.round='Final'")"
+echo "$($PSQL "SELECT games.year, teams.name FROM teams INNER JOIN games ON teams.team_id = games.winner_id WHERE games.round='Final' ORDER BY games.year")"
 
 echo -e "\nList of teams that start with 'Co':"
 echo "$($PSQL "SELECT name FROM teams WHERE name LIKE 'Co%'")"
