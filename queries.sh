@@ -26,10 +26,10 @@ echo -e "\nNumber of games where the winning team scored more than two goals:"
 echo "$($PSQL "SELECT COUNT(*) FROM games WHERE winner_goals > 2")"
 
 echo -e "\nWinner of the 2018 tournament team name:"
-echo
+echo "$($PSQL "SELECT name FROM teams where team_id IN (SELECT winner_id FROM games WHERE year=2018 AND round='Final')")"
 
 echo -e "\nList of teams who played in the 2014 'Eighth-Final' round:"
-echo
+echo "$($PSQL "SELECT name FROM teams where team_id IN (SELECT winner_id FROM games WHERE year=2014 AND round='Eighth-Final')")"
 
 echo -e "\nList of unique winning team names in the whole data set:"
 echo
